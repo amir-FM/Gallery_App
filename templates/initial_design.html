@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="./public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Website CSS -->
+  <link rel="stylesheet" type="text/css" href="./public/style.css">
+
+  <title>Lab 02 - Web Basics</title>
+</head>
+<body>
+  <!-- Note: <header> tag is a layout standard in HTML5! use CSS to customize it! -->
+  <header class="site-header">
+      <div id="header-image" />
+      <!-- TODO_task01: insert header background image in here (also check public/style.css for further hints!) -->
+      <!-- <div id="header-image"></div> -->
+    </div>
+
+    <!-- This is a navigation bar (i.e., menu) -->
+    <nav class="navbar navbar-expand-md navbar-dark">
+      <div class="container">
+        <a class="navbar-brand mr-4" href="#todo">Menu</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggle">
+          <!-- Left side buttons: -->
+          <div class="navbar-nav mr-auto">
+            <a class="nav-item nav-link active" href="/">Home</a>
+            <a class="nav-item nav-link" href="/second">Second</a>
+            <a class="nav-item nav-link" href="#" 
+                onclick="alert('Hello to you, too!')">Contact</a>
+          </div>
+          <!-- Right side: -->
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" href="#not-yet">Login</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main page content element (with main content + right sidebar) -->
+  <main role="main" class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <!-- Left-side content: page title + actual page text -->
+        <div class="content-box main-content">
+          <!-- Big page title -->
+          <h1 class="main-title">Homepage</h1>
+          <!-- TODO_task01: Add some lorem ipsum paragraphs here (remove the TODO class, please!) -->
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mauris a diam maecenas sed enim ut sem. Leo in vitae turpis massa. Dolor morbi non arcu risus quis varius quam. Id aliquet risus feugiat in ante metus dictum. Nunc sed velit dignissim sodales ut eu sem integer vitae. Urna et pharetra pharetra massa massa ultricies mi quis hendrerit. Aliquam purus sit amet luctus venenatis lectus. Interdum velit laoreet id donec ultrices tincidunt arcu. Nulla posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus. </p>
+          <p>Suspendisse potenti nullam ac tortor vitae purus faucibus. Tristique risus nec feugiat in fermentum posuere. Ipsum a arcu cursus vitae congue mauris. Facilisi nullam vehicula ipsum a arcu cursus vitae congue. Sagittis aliquam malesuada bibendum arcu vitae elementum curabitur. Volutpat est velit egestas dui. Nibh sed pulvinar proin gravida. Arcu dictum varius duis at consectetur lorem donec massa sapien. Augue eget arcu dictum varius duis at consectetur lorem donec.</p>
+          <p>Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi. Sapien faucibus et molestie ac feugiat sed. In ornare quam viverra orci sagittis eu volutpat. Condimentum id venenatis a condimentum. Sed risus ultricies tristique nulla aliquet enim tortor. Neque sodales ut etiam sit amet nisl. Urna condimentum mattis pellentesque id. Ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Varius vel pharetra vel turpis nunc. Vel eros donec ac odio tempor. Augue ut lectus arcu bibendum at varius vel pharetra. Sit amet nisl suscipit adipiscing bibendum est ultricies integer quis. Blandit libero volutpat sed cras ornare. Eget felis eget nunc lobortis. A diam maecenas sed enim. Pellentesque eu tincidunt tortor aliquam nulla facilisi cras. Quam lacus suspendisse faucibus interdum posuere lorem ipsum. Elementum curabitur vitae nunc sed velit dignissim sodales ut eu. Tincidunt dui ut ornare lectus.</p>
+          <!-- <p class="todo"><b>TODO_task01:</b> Insert content here</p> -->
+        </div>
+      </div>
+
+      <!-- Right side bar  -->
+      <div class="col-md-4">
+        <div class="content-box" id="account">
+          <h4>Your Account</h4>
+          <!-- Don't worry, you'll get to make this update dynamically at the next lab! -->
+          <p class="logged-out">Not authenticated!</p>
+          <p>Click <a href="#not-today">here to login</a></p>
+        </div>
+
+        <div class="content-box">
+          <h4>Changelog</h4>
+          <p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item list-group-item-light">
+                <div class="d-flex w-100 justify-content-between">
+                  <div class="news-item mb-1">First version of the website</div>
+                  <small class="text-muted">&#128197; 2024-03-18</small>
+                </div>
+              </li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Include Bootstrap script (should be here, at the bottom, as per Bootstrap docs) -->
+  <script src="./public/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

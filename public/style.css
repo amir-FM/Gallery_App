@@ -1,0 +1,87 @@
+/* Main body styles */
+body {
+  background: #EEE;
+  color: #111;
+}
+
+/* Title / Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+header {
+  background-color: #26262e;
+}
+
+/* TODO_task01: insert your preferred header here */
+header #header-image {
+  height: 180px;
+  background: url("./images/maestrul.jpg");
+  background-size: cover;
+  text-align: right;
+  border-radius: 15px;
+}
+
+header #header-image h1 {
+  display: inline-block;
+  background: #222;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  color: white;
+  font-weight: bold;
+}
+
+/* Site header + navigation */
+/* TODO_task01: customize your colors */
+.site-header > nav {
+  background-color: #9900cc;
+}
+.site-header .navbar-nav .nav-link {
+  color: #EEEEEE;
+  padding: 0.5em 1em;
+}
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+  background: #c61aff;
+  /* border-radius: 15px; */
+}
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+main {
+  margin-top: 1.5rem;
+}
+
+/* content box with borders and background */
+/* TODO_task01: make box rounded ;) */
+.content-box {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  margin-bottom: 20px;
+}
+.content-box.main-content {
+  min-height: 100%;
+}
+
+.news-item { color: #000; }
+
+h1.main-title {
+  color: #136;
+  padding-bottom: 0.4em;
+  margin-top: 1rem;
+  margin-bottom: 0.7em;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+/* yellow box for content TODO, you can remove it after completion */
+.todo {
+  background: #FFA;
+  padding: 0.7rem;
+  font-style: italic;
+}
+
+.active {
+  background: #c61aff;
+}
