@@ -17,6 +17,10 @@ ALLOWED_USERS = {
 DATABASE_FILE = "database.txt"
 
 
+@app.route("/land")
+def landing():
+    return render_template('land.html', image="./public/images/html-programming.jpg")
+
 @app.route("/")
 def index():
     # TODO Task 01: render the index page using child template
