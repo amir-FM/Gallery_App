@@ -13,13 +13,12 @@ header {
   background-color: #26262e;
 }
 
-/* TODO_task01: insert your preferred header here */
 header #header-image {
   height: 180px;
-  background: url("./images/maestrul.jpg");
+  background: url('images/html-programming.jpg') no-repeat;
   background-size: cover;
+  padding: 1rem 2rem;
   text-align: right;
-  border-radius: 15px;
 }
 
 header #header-image h1 {
@@ -32,21 +31,24 @@ header #header-image h1 {
 }
 
 /* Site header + navigation */
-/* TODO_task01: customize your colors */
 .site-header > nav {
-  background-color: #9900cc;
+  background-color: #249;
 }
 .site-header .navbar-nav .nav-link {
   color: #EEEEEE;
   padding: 0.5em 1em;
+  margin: 0 0.3em;
+  border-radius: 10px;
 }
 .site-header .navbar-nav .nav-link:hover {
   color: #ffffff;
-  background: #c61aff;
-  /* border-radius: 15px; */
+  background: #25D;
+  border-radius: 10px;
 }
 .site-header .navbar-nav .nav-link.active {
   font-weight: 500;
+  color: #336;
+  background: #FFFFFF;
 }
 
 main {
@@ -54,12 +56,13 @@ main {
 }
 
 /* content box with borders and background */
-/* TODO_task01: make box rounded ;) */
 .content-box {
   background: #ffffff;
   padding: 10px 20px;
   border: 1px solid #dddddd;
   margin-bottom: 20px;
+  /* make box rounded ;) */
+  border-radius: 5px;
 }
 .content-box.main-content {
   min-height: 100%;
@@ -75,13 +78,9 @@ h1.main-title {
   border-bottom: 1px solid #DDDDDD;
 }
 
-/* yellow box for content TODO, you can remove it after completion */
 .todo {
   background: #FFA;
   padding: 0.7rem;
   font-style: italic;
 }
 
-.active {
-  background: #c61aff;
-}

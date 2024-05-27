@@ -1,38 +1,90 @@
-# Imported symbols here please!
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, session
 
-
-# Initialize the Flask application
-# Note: static folder means all files in there will be automatically offered over HTTP
+# Note: static folder means all files from there will be automatically served over HTTP
 app = Flask(__name__, static_folder="public")
+app.secret_key = "TODO_task3"
+
+# TODO Task 02: you can use a global variable for storing the auth session
+# e.g., add the "authenticated" (boolean) and "username" (string) keys.
+
+# you can use a dict as user/pass database
+ALLOWED_USERS = {
+    "test": "test123",
+    "admin": "n0h4x0rz-plz",
+}
+
+# Task 04: database filename
+DATABASE_FILE = "database.txt"
 
 
 @app.route("/")
 def index():
-    # TODO_task03: read & respond with your HTML page, as string!
-    return render_template('initial_design.html')
+    # TODO Task 01: render the index page using child template
+    return render_template('index.html')
 
-@app.route("/google")
-def redir_to_google():
-    # TODO_task03: temporary redirect to https://www.google.com
-    return redirect("https://www.google.com", code=302)
-
-# TODO_task03: Add the second page to your website!
 @app.route("/second")
-def second_page():
-    # just like the index!
-    # make sure to clone/rename the html file and adjust its contents!
-    return render_template('second.html', mycontent=request.args.get("mycontent", "<not specified>"))
+def second():
+    # TODO Task 01: render the second page using child template
+    return render_template('second.html', mycontent=request.args.get('mycontent'))
+
+# TODO Task 02: Authentication
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    error_msg = "Wrong username or password"
+    if request.method == "POST":
+        username = request.form.get("username", "")
+        password = request.form.get("password", "")
+        if ALLOWED_USERS.get(username) == password:
+            session['username'] = username
+            return redirect("/")
+        else:
+            return render_template("login.html", error_msg=error_msg)
+        # TODO: verify credentials and set the session dict
+    elif request.method == "GET":
+        return render_template("login.html")
+    # return "TODO"
+
+@app.route("/logout")
+def logout():
+    # TODO Task 02: clear authentication status
+    # session["authenticated"] = False
+    session.clear()
+    return redirect("/")
+    # return "TODO"
+
+# @app.context_processor
+# def inject_template_vars():
+#     if session["authenticated"]:
+#         return
+
+# You can use this as a starting point for Task 04
+# (note: you need a "write" counterpart)
+def read_database(filename):
+    """ Reads the user account details database file (line by line). """
+    with open(filename, "rt") as f:
+        line1 = f.readline()
+        line2 = f.readline()
+        age = int(f.readline())
+        return {
+            "first_name": line1,
+            "last_name": line2,
+            "age": age,
+        }
+
+# TODO Task 04: Save Account Details
+@app.route("/account-details", methods=["GET", "POST"])
+def save_account():
+    # Hint: if method == "GET", read the data from the database and pass it to the template
+    # otherwise (when POST), replace the database with the user-provided data.
+    return "TODO_task4"
 
 @app.errorhandler(404)
 def error404(code):
-    # TODO_bonus: make it show a fancy HTTP 404 error page, with red background and bold message ;) 
+    # bonus: make it show a fancy HTTP 404 error page, with red background and bold message ;) 
     return "HTTP Error 404 - Page Not Found"
 
 
-# this is the equivalent of the main() function, only executed if script is started directly!
-# (e.g., condition is false if script is imported as library)
+# Run the webserver (port 5000 - the default Flask port)
 if __name__ == "__main__":
-    # start the Flask server (port 5000 - the default one, though you can freely change it!)
     app.run(debug=True, port=5000)
 
