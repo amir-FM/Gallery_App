@@ -27,7 +27,9 @@
               </a>
               <a class="nav-item nav-link active" href="/">Home</a>
               <a class="nav-item nav-link" href="/second">Second</a>
-              <a class="nav-item nav-link" href="#TODO_third-if-you-want">About</a>
+              {%if session %}
+                <a class="nav-item nav-link" href="/upload">Upload</a>
+              {% endif %}
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
@@ -35,6 +37,7 @@
               <a class="nav-item nav-link" href="/logout">Logout</a>
               {% else %}
               <a class="nav-item nav-link" href="/login">Login</a>
+              <a class="nav-item nav-link" href="/register">Register</a>
               {% endif %}
             </div>
           </div>

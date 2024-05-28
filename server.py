@@ -45,7 +45,20 @@ def login():
             return render_template("login.html", error_msg=error_msg)
     elif request.method == "GET":
         return render_template("login.html")
-    # return "TODO"
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    error_msg = "Wrong username or password"
+    if request.method == "POST":
+        username = request.form.get("username", "")
+        password = request.form.get("password", "")
+        if ALLOWED_USERS.get(username) == password:
+            session['username'] = username
+            return redirect("/")
+        else:
+            return render_template("register.html", error_msg=error_msg)
+    elif request.method == "GET":
+        return render_template("register.html")
 
 @app.route("/logout")
 def logout():
