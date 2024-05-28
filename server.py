@@ -43,7 +43,6 @@ def login():
             return redirect("/")
         else:
             return render_template("login.html", error_msg=error_msg)
-        # TODO: verify credentials and set the session dict
     elif request.method == "GET":
         return render_template("login.html")
     # return "TODO"

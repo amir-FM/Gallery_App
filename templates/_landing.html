@@ -22,13 +22,20 @@
         <div class="container">
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
+              <a class="navbar-brand" href="\land">
+                <img src="../public/images/logo.png" width="30" height="30" alt="logo">
+              </a>
               <a class="nav-item nav-link active" href="/">Home</a>
               <a class="nav-item nav-link" href="/second">Second</a>
               <a class="nav-item nav-link" href="#TODO_third-if-you-want">About</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
+              {%if session %}
+              <a class="nav-item nav-link" href="/logout">Logout</a>
+              {% else %}
               <a class="nav-item nav-link" href="/login">Login</a>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -41,8 +48,8 @@
       <div class="actions">
         <h1>Welcome!</h1>
         <div class="action-buttons">
-          <button type="button" class="btn btn-primary">Login</button>
-          <button type="button" class="btn btn-light">Register</button>
+          <a href="/login" class="btn btn-primary">Login</a>
+          <a href="/register" class="btn btn-light">Register</a>
         </div>
       </div>
     </main>

@@ -27,19 +27,22 @@
     <!-- This is the menu -->
     <nav class="navbar navbar-expand-md navbar-dark">
       <div class="container">
-        <a class="navbar-brand mr-4" href="/">Menu</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
+            <a class="navbar-brand" href="\land">
+              <img src="../public/images/logo.png" width="30" height="30" alt="logo">
+            </a>
             <a class="nav-item nav-link active" href="/">Home</a>
             <a class="nav-item nav-link" href="/second">Second</a>
             <a class="nav-item nav-link" href="#TODO_third-if-you-want">About</a>
           </div>
           <!-- Navbar Right Side -->
           <div class="navbar-nav">
-            <a class="nav-item nav-link" href="/login">Login</a>
+              {%if session %}
+              <a class="nav-item nav-link" href="/logout">Logout</a>
+              {% else %}
+              <a class="nav-item nav-link" href="/login">Login</a>
+              {% endif %}
           </div>
         </div>
       </div>
@@ -49,14 +52,14 @@
   <!-- Main container follows (with main content + right sidebar) -->
   <main role="main" class="container">
     <div class="row">
-      <div class="col-md-8">
+      <div class="">
         <!-- Left-side content -->
         <div class="content-box main-content">
             {% block content %}{% endblock %}
         </div>
       </div>
       <div class="col-md-4">
-        <!-- Right side bar -->
+        <!-- Right side bar 
         <div class="content-box" id="account">
           {% if session['username'] %}
           <h4> Hello {{session['username']}}</h4>
@@ -67,31 +70,7 @@
           <p>Click <a href="/login">here to login</a></p>
           {% endif %}
         </div>
-        <div class="content-box">
-          <h4>Changelog</h4>
-          <p>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item list-group-item-light">
-                <div class="d-flex w-100 justify-content-between">
-                  <div class="news-item mb-1">We just added authentication!</div>
-                  <small class="text-muted">&#128197; 2024-03-31</small>
-                </div>
-              </li>
-              <li class="list-group-item list-group-item-light">
-                <div class="d-flex w-100 justify-content-between">
-                  <div class="news-item mb-1">&#128151; Migrate to Flask server</div>
-                  <small class="text-muted">&#128197; 2024-03-30</small>
-                </div>
-              </li>
-              <li class="list-group-item list-group-item-light">
-                <div class="d-flex w-100 justify-content-between">
-                  <div class="news-item mb-1">First version of the website</div>
-                  <small class="text-muted">&#128197; 2024-03-27</small>
-                </div>
-              </li>
-            </ul>
-          </p>
-        </div>
+-->
       </div>
     </div>
   </main>
