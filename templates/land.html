@@ -1,5 +1,15 @@
-{% extends "_landing.html" %}
+{% extends "_base.html" %}
 {% block title %}Instagal{% endblock %}
-{% block image %}
-{{ image}}
+
+{% block main %}
+  <div class="text-center image_div">
+  <img src={{ image }} class="fluid w-100" alt="showcase images">
+  </div>
+  <div class="actions">
+    <h1>Welcome!</h1>
+    <div class="action-buttons">
+      <a href="/login" class="btn btn-primary">Login</a>
+      <a href="/register" class="btn btn-light">Register</a>
+    </div>
+  </div>
 {% endblock %}
