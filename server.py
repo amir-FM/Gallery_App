@@ -38,11 +38,12 @@ def second():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     error_msg = "Wrong username or password"
+    invalid_fields = "Invalid username or password"
     if request.method == "POST":
         username = request.form.get("username", "")
         password = request.form.get("password", "")
         if username == "" or password == "":
-            return redirect("/login")
+            return render_template("login.html", error_msg=invalid_fields)
         if db.users.find_one({"username": username, "password" : password}):
             session['username'] = username
             return redirect("/")
@@ -54,11 +55,12 @@ def login():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     error_msg = "User exists"
+    invalid_fields = "Invalid username or password"
     if request.method == "POST":
         username = request.form.get("username", "")
         password = request.form.get("password", "")
         if username == "" or password == "":
-            return redirect("/register")
+            return render_template("register.html", error_msg=invalid_fields)
         if not db.users.find_one({"username": username}):
             db.users.insert_one({"username": username, "password": password})
             return redirect("/login")
