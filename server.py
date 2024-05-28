@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template, redirect, session
+from flask import Flask, request, render_template, redirect, session, abort
+from pymongo import MongoClient
 
 # Note: static folder means all files from there will be automatically served over HTTP
 app = Flask(__name__, static_folder="public")
@@ -15,6 +16,8 @@ ALLOWED_USERS = {
 
 # Task 04: database filename
 DATABASE_FILE = "database.txt"
+client = MongoClient('localhost', 27017)
+db = client.photoapp
 
 
 @app.route("/land")
@@ -38,7 +41,9 @@ def login():
     if request.method == "POST":
         username = request.form.get("username", "")
         password = request.form.get("password", "")
-        if ALLOWED_USERS.get(username) == password:
+        if username == "" or password == "":
+            return redirect("/login")
+        if db.users.find_one({"username": username, "password" : password}):
             session['username'] = username
             return redirect("/")
         else:
@@ -48,13 +53,15 @@ def login():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    error_msg = "Wrong username or password"
+    error_msg = "User exists"
     if request.method == "POST":
         username = request.form.get("username", "")
         password = request.form.get("password", "")
-        if ALLOWED_USERS.get(username) == password:
-            session['username'] = username
-            return redirect("/")
+        if username == "" or password == "":
+            return redirect("/register")
+        if not db.users.find_one({"username": username}):
+            db.users.insert_one({"username": username, "password": password})
+            return redirect("/login")
         else:
             return render_template("register.html", error_msg=error_msg)
     elif request.method == "GET":
@@ -72,7 +79,10 @@ def upload():
         else:
             return render_template("login.html", error_msg=error_msg)
     elif request.method == "GET":
-        return render_template("upload.html")
+        if session:
+            return render_template("upload.html")
+        abort(403)
+        return jsonify({"success": "false"})
 
 @app.route("/logout")
 def logout():
