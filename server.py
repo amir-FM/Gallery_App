@@ -60,6 +60,20 @@ def register():
     elif request.method == "GET":
         return render_template("register.html")
 
+@app.route("/upload", methods=["GET", "POST"])
+def upload():
+    error_msg = "Wrong username or password"
+    if request.method == "POST":
+        username = request.form.get("username", "")
+        password = request.form.get("password", "")
+        if ALLOWED_USERS.get(username) == password:
+            session['username'] = username
+            return redirect("/")
+        else:
+            return render_template("login.html", error_msg=error_msg)
+    elif request.method == "GET":
+        return render_template("upload.html")
+
 @app.route("/logout")
 def logout():
     # TODO Task 02: clear authentication status
