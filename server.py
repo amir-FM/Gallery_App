@@ -4,6 +4,7 @@ import os
 
 # Note: static folder means all files from there will be automatically served over HTTP
 app = Flask(__name__, static_folder="public")
+#modal = Modal(app)
 app.secret_key = "TODO_task3"
 
 # TODO Task 02: you can use a global variable for storing the auth session
@@ -16,8 +17,7 @@ ALLOWED_USERS = {
 }
 
 # Task 04: database filename
-DATABASE_FILE = "database.txt"
-PHOTOS_BASE = "./photos"
+PHOTOS_BASE = "./public/photos"
 client = MongoClient('localhost', 27017)
 db = client.photoapp
 
@@ -34,7 +34,11 @@ def index():
 @app.route("/second")
 def second():
     # TODO Task 01: render the second page using child template
-    return render_template('second.html', mycontent=request.args.get('mycontent'))
+    if not session:
+        abort(403)
+    path = PHOTOS_BASE + "/" + session['username']
+    photos = os.listdir(path)
+    return render_template('second.html', path=path, photos=photos)
 
 # TODO Task 02: Authentication
 @app.route("/login", methods=["GET", "POST"])
@@ -79,10 +83,16 @@ def upload():
         rename = request.form.get("fileRename", "")
         section = request.form.get("section", "")
         path = PHOTOS_BASE + "/" + session['username']
+        extension = file.filename.split(".")[-1]
         if not os.path.isdir(path):
             os.mkdir(path)
+        if rename:
+            file.filename = rename.replace(" ", "") + "." + extension
+        else:
+            file.filename = file.filename.replace(" ", "")
+
         file.save(os.path.join(path, file.filename))
-        return redirect("/upload");
+        return redirect("/second");
     elif request.method == "GET":
         if session:
             return render_template("upload.html")
