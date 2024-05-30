@@ -52,6 +52,9 @@ def login():
             return render_template("login.html", error_msg=invalid_fields)
         if db.users.find_one({"username": username, "password" : password}):
             session['username'] = username
+        path = PHOTOS_BASE + "/" + session['username']
+        if not os.path.isdir(path):
+            os.mkdir(path)
             return redirect("/")
         else:
             return render_template("login.html", error_msg=error_msg)
@@ -84,8 +87,6 @@ def upload():
         section = request.form.get("section", "")
         path = PHOTOS_BASE + "/" + session['username']
         extension = file.filename.split(".")[-1]
-        if not os.path.isdir(path):
-            os.mkdir(path)
         if rename:
             file.filename = rename.replace(" ", "") + "." + extension
         else:
