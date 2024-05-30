@@ -1,10 +1,10 @@
 {% extends "_base.html" %}
-{% block title %}Second Page{% endblock %}
+{% block title %}Gallery{% endblock %}
 {% block main %}
 <div class="gallery">
   {% for i in photos %}
   <a class="btn" data-bs-toggle="modal" data-bs-target={{"#" + i}}>
-    <img class="gallery_elem" src={{"." + path + "/" + i }}>
+    <img class="gallery_elem_small" src={{"." + path + "/" + i }}>
   </a>
   <div class="modal fade" id={{i}} data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -15,13 +15,12 @@
         </div>
           <img class="gallery_elem" src={{"." + path + "/" + i }}>
         <div class="modal-footer">
-    <form action={{"/second/" + i}} method="post">
+    <form action={{"/gallery/" + i}} method="post">
           <button type="submit" class="btn btn-primary">Delete</button>
         </div>
       </div>
     </div>
   </div>
-</div>
   {% endfor %}
 </div>
 {% endblock %}

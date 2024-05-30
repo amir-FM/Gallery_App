@@ -31,14 +31,14 @@ def index():
     # TODO Task 01: render the index page using child template
     return render_template('index.html')
 
-@app.route("/second")
-def second():
-    # TODO Task 01: render the second page using child template
+@app.route("/gallery")
+def gallery():
+    # TODO Task 01: render the gallery page using child template
     if not session:
         abort(403)
     path = PHOTOS_BASE + "/" + session['username']
     photos = os.listdir(path)
-    return render_template('second.html', path=path, photos=photos)
+    return render_template('gallery.html', path=path, photos=photos)
 
 # TODO Task 02: Authentication
 @app.route("/login", methods=["GET", "POST"])
@@ -95,7 +95,7 @@ def upload():
             file.filename = section + "_" + file.filename.replace(" ", "")
 
         file.save(os.path.join(path, file.filename))
-        return redirect("/second");
+        return redirect("/gallery");
     elif request.method == "GET":
         if session:
             return render_template("upload.html")
@@ -136,19 +136,19 @@ def save_account():
     # otherwise (when POST), replace the database with the user-provided data.
     return "TODO_task4"
 
-@app.route("/second/<file>", methods=["POST"])
-def seconddel(file):
-    # TODO Task 01: render the second page using child template
+@app.route("/gallery/<file>", methods=["POST"])
+def gallerydel(file):
+    # TODO Task 01: render the gallery page using child template
     if request.method == "GET":
         abort(403)
-        return redirect("/second")
+        return redirect("/gallery")
     if not session:
         abort(403)
     path = PHOTOS_BASE + "/" + session['username']
     if not os.path.isfile(path + "/" + file):
-        return redirect("/second")
+        return redirect("/gallery")
     os.remove(path + "/" + file)
-    return redirect("/second");
+    return redirect("/gallery");
 
 @app.errorhandler(404)
 def error404(code):
