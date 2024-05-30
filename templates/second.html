@@ -15,7 +15,8 @@
         </div>
           <img class="gallery_elem" src={{"." + path + "/" + i }}>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Understood</button>
+    <form action={{"/second/" + i}} method="post">
+          <button type="submit" class="btn btn-primary">Delete</button>
         </div>
       </div>
     </div>

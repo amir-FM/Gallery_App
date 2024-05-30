@@ -52,12 +52,12 @@ def login():
             return render_template("login.html", error_msg=invalid_fields)
         if db.users.find_one({"username": username, "password" : password}):
             session['username'] = username
+        else:
+            return render_template("login.html", error_msg=error_msg)
         path = PHOTOS_BASE + "/" + session['username']
         if not os.path.isdir(path):
             os.mkdir(path)
-            return redirect("/")
-        else:
-            return render_template("login.html", error_msg=error_msg)
+        return redirect("/")
     elif request.method == "GET":
         return render_template("login.html")
 
@@ -133,6 +133,20 @@ def save_account():
     # Hint: if method == "GET", read the data from the database and pass it to the template
     # otherwise (when POST), replace the database with the user-provided data.
     return "TODO_task4"
+
+@app.route("/second/<file>", methods=["POST"])
+def seconddel(file):
+    # TODO Task 01: render the second page using child template
+    if request.method == "GET":
+        abort(403)
+        return redirect("/second")
+    if not session:
+        abort(403)
+    path = PHOTOS_BASE + "/" + session['username']
+    if not os.path.isfile(path + "/" + file):
+        return redirect("/second")
+    os.remove(path + "/" + file)
+    return redirect("/second");
 
 @app.errorhandler(404)
 def error404(code):
