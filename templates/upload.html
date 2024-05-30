@@ -3,15 +3,15 @@
 {% block content %}
 <h1 class="main-title">Upload</h1>
 
-<form method="post" class="login-form was-validated">
+<form method="post" enctype="multipart/form-data" class="login-form was-validated">
   {% if error_msg %}
   <div style="color: red;">{{ error_msg }}</div>
   {% endif %}
   <div class="row">
     <div class="col">
       <div class="mb-3">
-        <label for="formFile" class="form-label" >Select file</label>
-        <input class="form-control" type="file" id="formFile" required>
+        <label for="file" class="form-label" >Select file</label>
+        <input class="form-control" name="file" type="file" id="file" accept=".jpeg,.png,.jpg" required>
       </div>
     </div>
     <div class="col">
@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="mb-3">
-    <select class="form-select" required>
+    <select class="form-select" id="section" required>
       <option value="">Open this select menu</option>
       <option value="1">Favourites</option>
       <option value="2">Dogs</option>

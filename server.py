@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, session, abort
 from pymongo import MongoClient
+import os
 
 # Note: static folder means all files from there will be automatically served over HTTP
 app = Flask(__name__, static_folder="public")
@@ -16,6 +17,7 @@ ALLOWED_USERS = {
 
 # Task 04: database filename
 DATABASE_FILE = "database.txt"
+PHOTOS_BASE = "./photos"
 client = MongoClient('localhost', 27017)
 db = client.photoapp
 
@@ -54,7 +56,7 @@ def login():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    error_msg = "User exists"
+    error_msg = "User already exists"
     invalid_fields = "Invalid username or password"
     if request.method == "POST":
         username = request.form.get("username", "")
@@ -73,13 +75,14 @@ def register():
 def upload():
     error_msg = "Wrong username or password"
     if request.method == "POST":
-        username = request.form.get("username", "")
-        password = request.form.get("password", "")
-        if ALLOWED_USERS.get(username) == password:
-            session['username'] = username
-            return redirect("/")
-        else:
-            return render_template("login.html", error_msg=error_msg)
+        file = request.files["file"]
+        rename = request.form.get("fileRename", "")
+        section = request.form.get("section", "")
+        path = PHOTOS_BASE + "/" + session['username']
+        if not os.path.isdir(path):
+            os.mkdir(path)
+        file.save(os.path.join(path, file.filename))
+        return redirect("/upload");
     elif request.method == "GET":
         if session:
             return render_template("upload.html")

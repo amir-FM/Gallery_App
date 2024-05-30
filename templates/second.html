@@ -1,7 +1,10 @@
 {% extends "_base.html" %}
 
 {% block title %}Second Page{% endblock %}
-{% block content %}
-<h1 class="main_title">Second</h1>
-<p>{{ mycontent }}</p>
+{% block main %}
+<div class="gallery">
+  {% for i in photos %}
+  <h1 class="gallery_elem">test</h1>
+  {% endfor %}
+</div>
 {% endblock %}

@@ -92,3 +92,14 @@ h1.main-title {
   text-align: center;
   margin-top: 5vh;
 }
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.gallery_elem {
+  flex-basis: 20%;
+  align-self: center;
+}
