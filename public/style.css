@@ -102,5 +102,16 @@ h1.main-title {
 .gallery_elem {
   flex-basis: 20%;
   align-self: center;
-  width: 50vw;
+  max-width: 45vw;
+}
+
+.modal {
+    text-align: center;
+}
+
+body .modal-dialog {
+    text-align: left; /* you'll likely want this */
+    max-width: 100%;
+    width: auto !important;
+    display: inline-block;
 }
