@@ -55,8 +55,10 @@ def login():
         else:
             return render_template("login.html", error_msg=error_msg)
         path = PHOTOS_BASE + "/" + session['username']
+        # init dirs
         if not os.path.isdir(path):
             os.mkdir(path)
+
         return redirect("/")
     elif request.method == "GET":
         return render_template("login.html")
@@ -88,9 +90,9 @@ def upload():
         path = PHOTOS_BASE + "/" + session['username']
         extension = file.filename.split(".")[-1]
         if rename:
-            file.filename = rename.replace(" ", "") + "." + extension
+            file.filename = section + "_" + rename.replace(" ", "") + "." + extension
         else:
-            file.filename = file.filename.replace(" ", "")
+            file.filename = section + "_" + file.filename.replace(" ", "")
 
         file.save(os.path.join(path, file.filename))
         return redirect("/second");
