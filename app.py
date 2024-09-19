@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, session, abort
 from pymongo import MongoClient
+from flask_socketio import SocketIO
 import os
 
 app = Flask(__name__, static_folder="public")
@@ -132,4 +133,4 @@ if __name__ == "__main__":
     if not os.path.isdir(PHOTOS_BASE):
         os.makedirs(PHOTOS_BASE)
 
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)
