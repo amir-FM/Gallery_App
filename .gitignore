@@ -1,3 +1,4 @@
-# Ignore .env
 .env
-./public/photos/
+.venv
+*.zip
+public/photos/

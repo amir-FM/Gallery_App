@@ -127,4 +127,9 @@ def error404(code):
 
 
 if __name__ == "__main__":
+
+    # check if "photo dbs" exists
+    if not os.path.isdir(PHOTOS_BASE):
+        os.makedirs(PHOTOS_BASE)
+
     app.run(debug=True, port=5000)
