@@ -2,16 +2,9 @@ from flask import Flask, request, render_template, redirect, session, abort
 from pymongo import MongoClient
 import os
 
-# Note: static folder means all files from there will be automatically served over HTTP
 app = Flask(__name__, static_folder="public")
-#modal = Modal(app)
 app.secret_key = "TODO_task3"
 
-# TODO Task 02: you can use a global variable for storing the auth session
-# e.g., add the "authenticated" (boolean) and "username" (string) keys.
-
-# you can use a dict as user/pass database
-# Task 04: database filename
 PHOTOS_BASE = "./public/photos"
 client = MongoClient("localhost", 27017)
 db = client.photoapp
@@ -23,19 +16,16 @@ def landing():
 
 @app.route("/")
 def index():
-    # TODO Task 01: render the index page using child template
     return render_template('index.html')
 
 @app.route("/gallery")
 def gallery():
-    # TODO Task 01: render the gallery page using child template
     if not session:
         abort(403)
     path = PHOTOS_BASE + "/" + session['username']
     photos = os.listdir(path)
     return render_template('gallery.html', path=path, photos=photos)
 
-# TODO Task 02: Authentication
 @app.route("/login", methods=["GET", "POST"])
 def login():
     error_msg = "Wrong username or password"
@@ -99,19 +89,9 @@ def upload():
 
 @app.route("/logout")
 def logout():
-    # TODO Task 02: clear authentication status
-    # session["authenticated"] = False
     session.clear()
     return redirect("/")
-    # return "TODO"
 
-# @app.context_processor
-# def inject_template_vars():
-#     if session["authenticated"]:
-#         return
-
-# You can use this as a starting point for Task 04
-# (note: you need a "write" counterpart)
 def read_database(filename):
     """ Reads the user account details database file (line by line). """
     with open(filename, "rt") as f:
@@ -124,16 +104,12 @@ def read_database(filename):
             "age": age,
         }
 
-# TODO Task 04: Save Account Details
 @app.route("/account-details", methods=["GET", "POST"])
 def save_account():
-    # Hint: if method == "GET", read the data from the database and pass it to the template
-    # otherwise (when POST), replace the database with the user-provided data.
     return "TODO_task4"
 
 @app.route("/gallery/<file>", methods=["POST"])
 def gallerydel(file):
-    # TODO Task 01: render the gallery page using child template
     if request.method == "GET":
         abort(403)
         return redirect("/gallery")
@@ -147,11 +123,8 @@ def gallerydel(file):
 
 @app.errorhandler(404)
 def error404(code):
-    # bonus: make it show a fancy HTTP 404 error page, with red background and bold message ;) 
     return "HTTP Error 404 - Page Not Found"
 
 
-# Run the webserver (port 5000 - the default Flask port)
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
-

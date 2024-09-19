@@ -1,6 +1,7 @@
 {% extends "_base.html" %}
 {% block title %}Gallery{% endblock %}
 {% block main %}
+
 <div class="gallery">
   {% for i in photos %}
   <a class="btn" data-bs-toggle="modal" data-bs-target={{"#" + i}}>
