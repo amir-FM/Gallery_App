@@ -1,13 +1,12 @@
 from flask import Flask, request, render_template, redirect, session, abort
 from pymongo import MongoClient
-from flask_socketio import SocketIO
 import os
 
 app = Flask(__name__, static_folder="public")
 app.secret_key = "TODO_task3"
 
 PHOTOS_BASE = "./public/photos"
-client = MongoClient("localhost", 27017)
+client = MongoClient(host='mongo_dbs', port=27017)
 db = client.photoapp
 
 
