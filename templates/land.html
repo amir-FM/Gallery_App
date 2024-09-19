@@ -8,8 +8,12 @@
   <div class="actions">
     <h1>Welcome!</h1>
     <div class="action-buttons">
-      <a href="/login" class="btn btn-primary">Login</a>
-      <a href="/register" class="btn btn-light">Register</a>
+      {% if not session %}
+        <a href="/login" class="btn btn-primary">Login</a>
+        <a href="/register" class="btn btn-light">Register</a>
+      {% else %}
+        <a href="/logout" class="btn btn-light">Logout</a>
+      {% endif %}
     </div>
   </div>
 {% endblock %}

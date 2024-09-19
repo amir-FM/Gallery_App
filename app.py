@@ -11,14 +11,9 @@ app.secret_key = "TODO_task3"
 # e.g., add the "authenticated" (boolean) and "username" (string) keys.
 
 # you can use a dict as user/pass database
-ALLOWED_USERS = {
-    "test": "test123",
-    "admin": "n0h4x0rz-plz",
-}
-
 # Task 04: database filename
 PHOTOS_BASE = "./public/photos"
-client = MongoClient('localhost', 27017)
+client = MongoClient("localhost", 27017)
 db = client.photoapp
 
 

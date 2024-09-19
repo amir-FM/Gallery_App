@@ -1,7 +1,4 @@
-{# TODO: insert the HTML code from initial_design.html and convert it to a template #}
-{# Hint: use jinja blocks #}
-
-{# Note: this is a comment ;) #}
+{% from "macros.html" import nav_link with context %}
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +13,7 @@
   <link rel="stylesheet" type="text/css" href="./public/style.css">
 
   <!-- <title>Lab 03 - Advanced Web</title> -->
-  <title>{% block title %}{% endblock %}</title>
+  <title>{% block title %}Instagal{% endblock %}</title>
   {% endblock %}
 </head>
 <body>
@@ -32,19 +29,19 @@
             <a class="navbar-brand" href="\land">
               <img src="../public/images/logo.png" width="30" height="30" alt="logo">
             </a>
-            <a class="nav-item nav-link active" href="/">Home</a>
+            {{ nav_link('/', 'Home') }}
             {%if session %}
-              <a class="nav-item nav-link" href="/gallery">Gallery</a>
-              <a class="nav-item nav-link" href="/upload">Upload</a>
+            {{ nav_link('gallery', 'Gallery') }}
+            {{ nav_link('upload', 'Upload') }}
             {% endif %}
           </div>
           <!-- Navbar Right Side -->
           <div class="navbar-nav">
               {%if session %}
-              <a class="nav-item nav-link" href="/logout">Logout</a>
+            {{ nav_link('logout', 'Logout') }}
               {% else %}
-              <a class="nav-item nav-link" href="/login">Login</a>
-              <a class="nav-item nav-link" href="/register">Register</a>
+            {{ nav_link('login', 'Login') }}
+            {{ nav_link('register', 'Register') }}
               {% endif %}
           </div>
         </div>
