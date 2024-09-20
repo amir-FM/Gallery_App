@@ -5,7 +5,8 @@
 <div class="gallery">
   {% for i in photos %}
   <a class="btn" data-bs-toggle="modal" data-bs-target={{"#" + i}}>
-    <img class="gallery_elem_small" src={{"." + path + "/" + i }}>
+    <img class="gallery_elem_small" src={{"./" + path + "/" + i }}>
+    <!-- <img gallery="class_elem_small" src={{url_for('static', filename=path + i )}}> -->
   </a>
   <div class="modal fade" id={{i}} data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -14,7 +15,7 @@
           <h1 class="modal-title fs-5" id={{i}}>{{i}}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-          <img class="gallery_elem" src={{"." + path + "/" + i }}>
+          <img class="gallery_elem" src={{"./" + path + "/" + i }}>
         <div class="modal-footer">
     <form action={{"/gallery/" + i}} method="post">
           <button type="submit" class="btn btn-primary">Delete</button>

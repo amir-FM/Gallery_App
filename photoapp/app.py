@@ -5,7 +5,12 @@ import os
 app = Flask(__name__, static_folder="public")
 app.secret_key = "TODO_task3"
 
-PHOTOS_BASE = "./public/photos"
+# photos dbs
+PHOTOS_BASE_FOLDER = "public/static/photos"
+os.makedirs(PHOTOS_BASE_FOLDER, exist_ok=True)
+app.config['PHOTOS_BASE_FOLDER'] = PHOTOS_BASE_FOLDER
+
+# users dbs
 client = MongoClient(host='mongo_dbs', port=27017)
 db = client.photoapp
 
@@ -22,7 +27,7 @@ def index():
 def gallery():
     if not session:
         abort(403)
-    path = PHOTOS_BASE + "/" + session['username']
+    path = app.config['PHOTOS_BASE_FOLDER'] + "/" + session['username']
     photos = os.listdir(path)
     return render_template('gallery.html', path=path, photos=photos)
 
@@ -39,7 +44,7 @@ def login():
             session['username'] = username
         else:
             return render_template("login.html", error_msg=error_msg)
-        path = PHOTOS_BASE + "/" + session['username']
+        path = app.config['PHOTOS_BASE_FOLDER'] + "/" + session['username']
         # init dirs
         if not os.path.isdir(path):
             os.mkdir(path)
@@ -72,7 +77,7 @@ def upload():
         file = request.files["file"]
         rename = request.form.get("fileRename", "")
         section = request.form.get("section", "")
-        path = PHOTOS_BASE + "/" + session['username']
+        path = app.config['PHOTOS_BASE_FOLDER'] + "/" + session['username']
         extension = file.filename.split(".")[-1]
         if rename:
             file.filename = section + "_" + rename.replace(" ", "") + "." + extension
@@ -115,7 +120,7 @@ def gallerydel(file):
         return redirect("/gallery")
     if not session:
         abort(403)
-    path = PHOTOS_BASE + "/" + session['username']
+    path = app.config['PHOTOS_BASE_FOLDER'] + "/" + session['username']
     if not os.path.isfile(path + "/" + file):
         return redirect("/gallery")
     os.remove(path + "/" + file)
@@ -129,7 +134,7 @@ def error404(code):
 if __name__ == "__main__":
 
     # check if "photo dbs" exists
-    if not os.path.isdir(PHOTOS_BASE):
-        os.makedirs(PHOTOS_BASE)
+    # if not os.path.isdir(PHOTOS_BASE):
+    #     os.makedirs(PHOTOS_BASE)
 
     app.run(debug=True, host='0.0.0.0', port=5000)
