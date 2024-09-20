@@ -1,4 +1,4 @@
-# Gallery App
+# Gallery_App
 
 Multiuser **Docker + Flask + Jinja2 + MongoDB** photo-managing web app.
 
@@ -13,7 +13,7 @@ The application is split up into docker containers and run via a docker-compose 
 ## How to Run
 
 ``` sh
-git clone [url] [installation directory]
+git clone https://github.com/amir-FM/Gallery_App [installation directory]
 cd [installation directory]
 docker-compose up --build
 ```
