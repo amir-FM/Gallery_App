@@ -2,6 +2,8 @@
 
 Multiuser **Docker + Flask + Jinja2 + MongoDB** photo-managing web app.
 
+![demo](https://github.com/user-attachments/assets/299b098c-9130-4986-b1a7-472c8e5e207f)
+
 ## Description
 
 The application is split up into docker containers and run via a docker-compose file. The **flask** container is built using a *Dockerfile*, on an *Alpine Linux* image and used for the web app and picture storage. The user database is on an *MongoDB* container.
