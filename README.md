@@ -1,15 +1,17 @@
-# TemaIA1
+# Gallery App
 
-## Implementare
+Multiuser **Docker + Flask + Jinja2 + MongoDB** photo-managing web app.
 
-Am facut un frontend minimalist cu functii de: login, register, upload, delete.
-Ca baza de date am folosit mongodb (pentru useri)
-Pozele sunt stocate in directoare pentru fiecare user.
-Pe backend am facut rutele cerute cu middleware-ul corespunzator.
-Rutele nu pot fi accesate daca user-ul nu este autentificat.
+## Description
 
-## Probleme
+The application is split up into docker containers and run via a docker-compose file. The **flask** container is built using a *Dockerfile*, on an *Alpine Linux* image and used for the web app and picture storage. The user database is on an *MongoDB* container.
 
-Pentru ca am folosit mongodb am avut mari probleme cu docker (nu a dorit sa se conecteze la baza de date). Fara docker proiectul merge perfect pe masina locala.
+**Note:** The photo storage **is not** persistent and will reset at every rebuild of the **flask** container.
 
-dockerul ruleaza doar cu flagul: **--network host** dar apar erori
+## How to Run
+
+``` sh
+git clone [url] [installation directory]
+cd [installation directory]
+docker-compose up --build
+```
